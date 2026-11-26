@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "skills": {
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "computedHash": "ab1acb9fbd9eaee03da254abb8a8de228d1e7a07475fe959da4a5eefa34ea4b9"
+    },
+    "grilling": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grilling/SKILL.md",
+      "computedHash": "485451958784497cd4c4dbea13cb5bbb579da58fac0d0e45f3bcb310fab68ac7"
+    },
+    "kalopilot": {
+      "source": "sailtonight/kalopilot-skill",
+      "commit": "ea60e237dbfb98b704498d1e87803c9b2ba3eb8a",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "f72f0f79862e6ec9f0332ae8e390501a7a5fe54dcaa688bf1eb8ed0829b44cbb"
+    }
+  }
+}
