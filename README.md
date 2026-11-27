@@ -9,5 +9,5 @@ Nguồn duy nhất cho skill dùng ở mọi môi trường Claude Code.
 Thêm vào setup script của môi trường:
 
 ```bash
-git clone -q --depth 1 https://github.com/khoitran279/calude-skill /opt/calude-skill && bash /opt/calude-skill/sync.sh
+git clone -q --depth 1 https://github.com/khoitran279/claude-skill /opt/claude-skill && bash /opt/claude-skill/sync.sh
 ```
