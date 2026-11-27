@@ -33,3 +33,8 @@ for name, s in json.load(open(lock))["skills"].items():
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 PY
+
+# Cài thư viện JS trong tools/ (không làm hỏng sync nếu thiếu npm hoặc lỗi mạng).
+if [ -f "$HERE/tools/package-lock.json" ] && command -v npm >/dev/null 2>&1; then
+  (cd "$HERE/tools" && npm ci --no-audit --no-fund --silent) && echo "installed tools/ libraries" || echo "WARN: npm ci failed in tools/"
+fi
