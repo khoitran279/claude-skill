@@ -38,3 +38,22 @@ PY
 if [ -f "$HERE/tools/package-lock.json" ] && command -v npm >/dev/null 2>&1; then
   (cd "$HERE/tools" && npm ci --no-audit --no-fund --silent) && echo "installed tools/ libraries" || echo "WARN: npm ci failed in tools/"
 fi
+
+# Kiểm tra: mọi skill (tự viết + trong lock) đã có SKILL.md trong DEST chưa. Chỉ báo cáo, không làm hỏng phiên.
+python3 -I - "$HERE" "$DEST" <<'PY'
+import json, os, sys
+here, dest = sys.argv[1], sys.argv[2]
+want = {d for d in os.listdir(f"{here}/skills") if os.path.isfile(f"{here}/skills/{d}/SKILL.md")} if os.path.isdir(f"{here}/skills") else set()
+want |= set(json.load(open(f"{here}/skills-lock.json"))["skills"])
+missing = sorted(n for n in want if not os.path.isfile(f"{dest}/{n}/SKILL.md"))
+print(f"VERIFY skills: {len(want) - len(missing)}/{len(want)} installed in {dest}")
+if missing:
+    print("VERIFY MISSING:", ", ".join(missing))
+tools = f"{here}/tools"
+if os.path.isfile(f"{tools}/package.json"):
+    deps = json.load(open(f"{tools}/package.json")).get("dependencies", {})
+    bad = sorted(d for d in deps if not os.path.isdir(f"{tools}/node_modules/{d}"))
+    print(f"VERIFY libs: {len(deps) - len(bad)}/{len(deps)} installed in tools/node_modules")
+    if bad:
+        print("VERIFY MISSING libs:", ", ".join(bad))
+PY
